@@ -35,6 +35,18 @@ public class Kyrie {
                 } else {
                     System.out.println(separator + "Are you ok, choose a valid number" + separator);
                 } 
+            } else if (input.startsWith("todo ")) {
+                tasks[taskCount++] = new ToDo(input.substring(5));
+                System.out.println(separator + "added a new todo: " + tasks[taskCount - 1] + separator);
+            } else if (input.startsWith("deadline ")) {
+                String[] parts = input.substring(9).split(" /by ");
+                tasks[taskCount++] = new Deadline(parts[0], parts[1]);
+                System.out.println(separator + "added a new deadline: " + tasks[taskCount - 1] + separator);
+            } else if (input.startsWith("event ")) {
+                String[] parts = input.substring(6).split(" /from ");
+                String[] periodParts = parts[1].split(" /to ");
+                tasks[taskCount++] = new Event(parts[0], periodParts[0], periodParts[1]);
+                System.out.println(separator + "added a new event: " + tasks[taskCount - 1] + separator);
             } else {
                 tasks[taskCount++] = new Task(input);
                 System.out.println(separator + "added a new task: " + input + separator);
