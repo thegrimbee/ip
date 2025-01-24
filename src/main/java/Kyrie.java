@@ -8,8 +8,7 @@ public class Kyrie {
         String errorSeparator = KyrieException.errorSeparator;
         System.out.println("Shalom aleikhim, I am " + logo +"\nTell me what you desire" + separator);
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+        TaskList tasks = new TaskList();
         String input;
         while (true) {
             try {
@@ -18,51 +17,60 @@ public class Kyrie {
                     break;
                 } else if (input.equals("list")) {
                     System.out.println(separator + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+                    for (int i = 0; i < tasks.getTaskCount(); i++) {
+                        System.out.println("\t" + (i + 1) + ". " + tasks.getTask(i));
                     }
                     System.out.println(separator);
                 } else if (input.startsWith("mark ")) {
                     int taskNumber = Integer.parseInt(input.substring(5)) - 1;
-                    if (taskNumber >= 0 && taskNumber < taskCount) {
-                        tasks[taskNumber].markAsDone();
-                        System.out.println(separator + "Excellent, you have finished this task:\n\t" + tasks[taskNumber] + separator);
+                    if (taskNumber >= 0 && taskNumber < tasks.getTaskCount()) {
+                        tasks.markTaskAsDone(taskNumber);
+                        System.out.println(separator + "Excellent, you have finished this task:\n\t" + tasks.getTask(taskNumber) + separator);
                     } else {
                         throw new KyrieException("Invalid number");
                     } 
                 } else if (input.startsWith("unmark ")) {
                     int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-                    if (taskNumber >= 0 && taskNumber < taskCount) {
-                        tasks[taskNumber].unmarkAsDone();
-                        System.out.println(separator + "You have undone your choice, that task is no longer marked finished:\n\t" + tasks[taskNumber] + separator);
+                    if (taskNumber >= 0 && taskNumber < tasks.getTaskCount()) {
+                        tasks.unmarkTaskAsDone(taskNumber);
+                        System.out.println(separator + "You have undone your choice, that task is no longer marked finished:\n\t" + tasks.getTask(taskNumber) + separator);
                     } else {
                         throw new KyrieException("Invalid number");
                     } 
                 } else if (input.startsWith("todo ")) {
-                    if (taskCount == tasks.length) {
+                    if (tasks.isFull()) {
                         throw new KyrieException("You have reached the maximum number of tasks");
                     }
-                    tasks[taskCount++] = new ToDo(input.substring(5));
-                    System.out.println(separator + "added a new todo: " + tasks[taskCount - 1] + separator);
+                    tasks.addTask(new ToDo(input.substring(5)));
+                    System.out.println(separator + "added a new todo: " + tasks.getTask() + separator);
                 } else if (input.startsWith("deadline ")) {
-                    if (taskCount == tasks.length) {
+                    if (tasks.isFull()) {
                         throw new KyrieException("You have reached the maximum number of tasks");
                     } else if (!input.contains(" /by ")) {
                         throw new KyrieException("Invalid command, please add /by");
                     }
                     String[] parts = input.substring(9).split(" /by ");
-                    tasks[taskCount++] = new Deadline(parts[0], parts[1]);
-                    System.out.println(separator + "added a new deadline: " + tasks[taskCount - 1] + separator);
+                    tasks.addTask(new Deadline(parts[0], parts[1]));
+                    System.out.println(separator + "added a new deadline: " + tasks.getTask() + separator);
                 } else if (input.startsWith("event ")) {
-                    if (taskCount == tasks.length) {
+                    if (tasks.isFull()) {
                         throw new KyrieException("You have reached the maximum number of tasks");
                     } else if (!input.contains(" /from ") || !input.contains(" /to ")) {
                         throw new KyrieException("Invalid command, please add /from and /to");
                     }
                     String[] parts = input.substring(6).split(" /from ");
                     String[] periodParts = parts[1].split(" /to ");
-                    tasks[taskCount++] = new Event(parts[0], periodParts[0], periodParts[1]);
-                    System.out.println(separator + "added a new event: " + tasks[taskCount - 1] + separator);
+                    tasks.addTask(new Event(parts[0], periodParts[0], periodParts[1]));
+                    System.out.println(separator + "added a new event: " + tasks.getTask() + separator);
+                } else if (input.startsWith("delete")) {
+                    int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+                    if (taskNumber >= 0 && taskNumber < tasks.getTaskCount()) {
+                        Task task = tasks.getTask(taskNumber);
+                        tasks.deleteTask(taskNumber);
+                        System.out.println(separator + "Task vanquished:\n\t" + task + separator);
+                    } else {
+                        throw new KyrieException("Invalid number");
+                    }
                 } else {
                     throw new KyrieException("Invalid command");
                 }
