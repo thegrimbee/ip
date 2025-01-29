@@ -1,3 +1,5 @@
+package kyrie;
+
 public class KyrieException extends Exception {
     public static String errorSeparator = "\n\t__________________________ERROR_____________________________\n\t";
     public KyrieException(String message) {

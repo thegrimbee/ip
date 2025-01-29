@@ -1,3 +1,5 @@
+package kyrie;
+
 public class AddEventCommand extends Command {
     private String name;
     private DateTime from;

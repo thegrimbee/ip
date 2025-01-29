@@ -1,3 +1,5 @@
+package kyrie;
+
 public class Task {
     protected Boolean isDone;
     protected String name;

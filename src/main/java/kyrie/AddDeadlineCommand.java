@@ -1,3 +1,5 @@
+package kyrie;
+
 public class AddDeadlineCommand extends Command {
     private String name;
     private DateTime deadline;

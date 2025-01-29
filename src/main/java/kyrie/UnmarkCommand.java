@@ -1,15 +1,17 @@
-public class MarkCommand extends Command {
+package kyrie;
+
+public class UnmarkCommand extends Command {
     private Integer index;
 
-    public MarkCommand(Integer index) {
+    public UnmarkCommand(Integer index) {
         super();
         this.index = index;
     }
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList tasks) {
-        tasks.markTaskAsDone(this.index);
-        ui.showMarkedTask(tasks.getTask(this.index));
+        tasks.unmarkTaskAsDone(index);
+        ui.showMarkedTask(tasks.getTask(index));
         storage.saveData(tasks);
     }
 }
