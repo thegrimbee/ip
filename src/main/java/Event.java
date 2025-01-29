@@ -1,8 +1,8 @@
 public class Event extends Task {
-    protected String start;
-    protected String end;
+    protected DateTime start;
+    protected DateTime end;
 
-    public Event(String name, String start, String end) {
+    public Event(String name, DateTime start, DateTime end) {
         super(name, TaskType.EVENT);
         this.start = start;
         this.end = end;
@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return super.toFileString() + " | " + this.start + " | " + this.end;
+        return super.toFileString() + " | " + this.start.toInputFormatString() + " | " + this.end.toInputFormatString();    
     }
 
     @Override

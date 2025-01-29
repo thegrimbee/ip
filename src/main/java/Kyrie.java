@@ -55,7 +55,7 @@ public class Kyrie {
                         throw new KyrieException("Invalid command, please add /by");
                     }
                     String[] parts = input.substring(9).split(" /by ");
-                    tasks.addTask(new Deadline(parts[0], parts[1]));
+                    tasks.addTask(new Deadline(parts[0], new DateTime(parts[1])));
                     System.out.println(separator + "added a new deadline: " + tasks.getTask() + separator);
                 } else if (input.startsWith("event ")) {
                     if (tasks.isFull()) {
@@ -65,7 +65,7 @@ public class Kyrie {
                     }
                     String[] parts = input.substring(6).split(" /from ");
                     String[] periodParts = parts[1].split(" /to ");
-                    tasks.addTask(new Event(parts[0], periodParts[0], periodParts[1]));
+                    tasks.addTask(new Event(parts[0], new DateTime(periodParts[0]), new DateTime(periodParts[1])));
                     System.out.println(separator + "added a new event: " + tasks.getTask() + separator);
                 } else if (input.startsWith("delete")) {
                     int taskNumber = Integer.parseInt(input.substring(7)) - 1;

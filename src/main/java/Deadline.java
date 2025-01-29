@@ -1,14 +1,14 @@
 public class Deadline extends Task {
-    protected String deadline;
+    protected DateTime deadline;
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, DateTime deadline) {
         super(name, TaskType.DEADLINE);
         this.deadline = deadline;
     }
 
     @Override
     public String toFileString() {
-        return super.toFileString() + " | " + this.deadline;
+        return super.toFileString() + " | " + this.deadline.toInputFormatString();
     }
 
     @Override
