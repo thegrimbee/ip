@@ -9,22 +9,12 @@ public class Kyrie {
         String errorSeparator = KyrieException.errorSeparator;
         System.out.println("Shalom aleikhim, I am " + logo +"\nTell me what you desire" + separator);
 
-        File kyrieDataDir = new File("./data");
-        if (!kyrieDataDir.exists()) {
-            kyrieDataDir.mkdir();
-        }
-        File kyrieDataFile = new File("./data/kyrie.txt");
-        try {
-            if (!kyrieDataFile.exists()) {
-                kyrieDataFile.createNewFile();
-            }
-        } catch (IOException e) {
-            System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
-        }
-
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
         String input;
+        
+        DataHandler.createDirAndFile();
+        DataHandler.loadData(tasks);
         while (true) {
             try {
                 input = sc.nextLine();
@@ -89,6 +79,7 @@ public class Kyrie {
                 } else {
                     throw new KyrieException("Invalid command");
                 }
+                DataHandler.saveData(tasks);
             } catch (KyrieException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
