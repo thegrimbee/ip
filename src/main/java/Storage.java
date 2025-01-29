@@ -39,51 +39,47 @@ public class Storage {
         }
     }
 
-    public static void loadData() {
+    public TaskList loadData() throws IOException {
         TaskList tasks = new TaskList();
-        try {
-            File file = new File(this.FILE_PATH);
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                String[] parts = line.split(" \\| ");
-                Task task;
-                try {
-                    switch (parts[0]) {
-                    case "TODO":
-                        if (parts.length != 3) {
-                            throw new KyrieException("Invalid task format");
-                        }
-                        task = new ToDo(parts[2]);
-                        break;
-                    case "DEADLINE":
-                        if (parts.length != 4) {
-                            throw new KyrieException("Invalid task format");
-                        }
-                        task = new Deadline(parts[2], new DateTime(parts[3]));
-                        break;
-                    case "EVENT":
-                        if (parts.length != 4) {
-                            throw new KyrieException("Invalid task format");
-                        }
-                        task = new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
-                        break;
-                    default:
-                        throw new KyrieException("Invalid task type");
+        File file = new File(this.FILE_PATH);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] parts = line.split(" \\| ");
+            Task task;
+            try {
+                switch (parts[0]) {
+                case "TODO":
+                    if (parts.length != 3) {
+                        throw new KyrieException("Invalid task format");
                     }
-                } catch (KyrieException e) {
-                    System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
-                    continue;
+                    task = new Todo(parts[2]);
+                    break;
+                case "DEADLINE":
+                    if (parts.length != 4) {
+                        throw new KyrieException("Invalid task format");
+                    }
+                    task = new Deadline(parts[2], new DateTime(parts[3]));
+                    break;
+                case "EVENT":
+                    if (parts.length != 5) {
+                        throw new KyrieException("Invalid task format");
+                    }
+                    task = new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
+                    break;
+                default:
+                    throw new KyrieException("Invalid task type");
                 }
-                if (parts[1].equals("1")) {
-                    task.markAsDone();
-                }
-                tasks.addTask(task);
+            } catch (KyrieException e) {
+                System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
+                continue;
             }
-            sc.close();
-            return tasks;
-        } catch (IOException e) {
-            System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
+            if (parts[1].equals("1")) {
+                task.markAsDone();
+            }
+            tasks.addTask(task);
         }
+        sc.close();
+        return tasks;
     }
 }

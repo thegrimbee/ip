@@ -13,13 +13,15 @@ public class TaskList {
         this.taskCount++;
     }
 
-    public void deleteTask(int index) {
-        this.tasks.remove(index);
+    public Task deleteTask(int index) {
+        Task task = this.tasks.get(index - 1);
+        this.tasks.remove(index - 1);
         this.taskCount--;
+        return task;
     }
 
     public Task getTask(int index) {
-        return this.tasks.get(index);
+        return this.tasks.get(index - 1);
     }
 
     public Task getTask() {
@@ -35,11 +37,11 @@ public class TaskList {
     // }
 
     public void markTaskAsDone(int index) {
-        this.tasks.get(index).markAsDone();
+        this.tasks.get(index - 1).markAsDone();
     }
 
     public void unmarkTaskAsDone(int index) {
-        this.tasks.get(index).unmarkAsDone();
+        this.tasks.get(index - 1).unmarkAsDone();
     }
 
     public void listTasks() {

@@ -1,10 +1,10 @@
 public class ListCommand extends Command {
-    public ListCommand(Storage storage, Ui ui) {
-        super(storage, ui);
+    public ListCommand() {
+        super();
     }
 
     @Override
-    public void execute() {
-        Ui.printList();
+    public void execute(Storage storage, Ui ui, TaskList tasks) {
+        ui.showTasks(tasks);
     }
 }

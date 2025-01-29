@@ -11,7 +11,7 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public void showSeparator() {
+    public static void showSeparator() {
         System.out.println(separator);
     }
 
@@ -34,14 +34,37 @@ public class Ui {
         Ui.showSeparator();
     }
 
-    public void readCommand() {
+    public String readCommand() {
         return sc.nextLine();
     }
 
-    public void printList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.getTask(i));
+    public void respond(String response) {
+        Ui.showSeparator();
+        System.out.println(response);
+        Ui.showSeparator();
+    }
+
+    public void showTasks(TaskList tasks) {
+        String response = "Here are the tasks in your list:\n";
+        for (int i = 1; i <= tasks.getTaskCount(); i++) {
+            response += i + ". " + tasks.getTask(i) + "\n";
         }
+        this.respond(response);
+    }
+
+    public void showMarkedTask(Task task) {
+        this.respond("Excellent, you have finished this task:\n\t" + task);
+    }
+
+    public void showUnmarkedTask(Task task) {
+        this.respond("You have undone your choice, that task is no longer marked finished:\n\t" + task);
+    }
+
+    public void showAddedTask(Task task) {
+        this.respond("added a new task: " + task);
+    }
+
+    public void showDeletedTask(Task task, TaskList tasks) {
+        this.respond("Noted, I have removed this task:\n\t" + task + "\nNow you have " + tasks.getTaskCount() + " tasks remaining");
     }
 }
