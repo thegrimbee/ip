@@ -1,28 +1,58 @@
 import java.util.Scanner;
 
 public class Parser {
-    public static parseCommand(String command) {
-        Scanner sc = new Scanner(command);
-        String firstWord = sc.next();
-        switch (firstWord) {
+    public static parseCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        String command = commandParts[0];
+        switch (command) {
+            case "bye":
+                return new ByeCommand();
             case "list":
                 return new ListCommand();
-            case "bye":
-                return new ByeCommand(sc.nextInt());
-            case "delete":
-                return new DeleteCommand(sc.nextInt());
+            case "mark":
+                if (commandParts.length != 2) {
+                    throw new KyrieException("Invalid task number");
+                }
+                return new MarkCommand(Integer.parseInt(commandParts[1]), true);
+            case "unmark":
+                if (commandParts.length != 2) {
+                    throw new KyrieException("Invalid task number");
+                }
+                return new MarkCommand(Integer.parseInt(commandParts[1]), false);
             case "todo":
-                return new AddCommand(sc.nextLine(), TaskType.TODO);
+                if (commandParts.length != 2) {
+                    throw new KyrieException("Invalid task description");
+                }
+                return new AddTodoCommand(commandParts[1]);
             case "deadline":
-                return new AddCommand(sc.nextLine(), TaskType.DEADLINE);
+                if (commandParts.length != 4) {
+                    throw new KyrieException("Invalid task description");
+                }
+                String dateTimeParts = commandString.split(" /by ");
+                if (dateTimeParts.length != 2) {
+                    throw new KyrieException("Invalid task description");
+                }
+                return new AddDeadlineCommand(commandParts[1], new DateTime(dateTimeParts[1]));
             case "event":
-                return new AddCommand(sc.nextLine(), TaskType.EVENT);
-            case "find":
-                return new FindCommand(sc.nextLine());
-            case "bye":
-                return new ExitCommand();
+                if (commandParts.length != 4) {
+                    throw new KyrieException("Invalid task description");
+                }
+                String[] dateTimeParts = commandString.split(" /from ");
+                if (dateTimeParts.length != 2) {
+                    throw new KyrieException("Invalid task description");
+                }
+                String[] periodParts = dateTimeParts[1].split(" /to ");
+                if (periodParts.length != 2) {
+                    throw new KyrieException("Invalid task description");
+                }
+                return new AddEventCommand(commandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
+            case "delete":
+                if (commandParts.length != 2) {
+                    throw new KyrieException("Invalid task number");
+                }
+                return new DeleteCommand(Integer.parseInt(commandParts[1]));
             default:
-                throw new KyrieException("I'm sorry, but I don't know what that means :-(");
+                throw new KyrieException("It seems you have entered an invalid command");
         }
     }
 

@@ -3,21 +3,28 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Kyrie {
-    public static void main(String[] args) {
-        String logo = "Kyrie";
-        
-        String errorSeparator = KyrieException.errorSeparator;
-        System.out.println("Shalom aleikhim, I am " + logo +"\nTell me what you desire" + separator);
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
-        Storage storage = new Storage("./data");
-        Scanner sc = new Scanner(System.in);
-        TaskList tasks = storage.loadData();
-        String input;
-        
+    public Kyrie(String dirPath) {
+        this.ui = new Ui("Kyrie");
+        this.storage = new Storage(dirPath);
+        try {
+            this.tasks = storage.loadData();
+        } catch (IOException e) {
+            ui.showError(e);
+            this.tasks = new TaskList();
+        }
+    }
+
+    public void run() {
         storage.createDirAndFile();
         while (true) {
             try {
-                input = sc.nextLine();
+                String commandString = ui.readCommand();
+                Command command = Parser.parse(commandString);
+                command.execute(storage, ui, tasks);
                 if (input.equals("bye")) {
                     break;
                 } else if (input.equals("list")) {
@@ -89,4 +96,10 @@ public class Kyrie {
         System.out.println(separator + "Farewell, my friend!" + separator);
         sc.close();
     }
+
+    public static void main(String[] args) {
+        new Kyrie("./data").run();
+    }
+        
+        
 }
