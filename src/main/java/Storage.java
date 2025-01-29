@@ -4,16 +4,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String DIR_PATH = "./data";
-    private static final String FILE_PATH = "./data/kyrie.txt";
     static String errorSeparator = KyrieException.errorSeparator;
+    private final String DIR_PATH;
+    private final String FILE_PATH;
 
-    public static void createDirAndFile() {
-        File dir = new File(DIR_PATH);
+    public Storage(String dirPath) {
+        DIR_PATH = dirPath;
+        FILE_PATH = dirPath + "/tasks.txt";
+    }
+
+    public void createDirAndFile() {
+        File dir = new File(this.DIR_PATH);
         if (!dir.exists()) {
             dir.mkdir();
         }
-        File file = new File(FILE_PATH);
+        File file = new File(this.FILE_PATH);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -23,9 +28,9 @@ public class Storage {
         }
     }
 
-    public static void saveData(TaskList tasks) {
+    public void saveData(TaskList tasks) {
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(this.FILE_PATH);
             FileWriter writer = new FileWriter(file);
             writer.write(tasks.toFileString());
             writer.close();
@@ -34,9 +39,10 @@ public class Storage {
         }
     }
 
-    public static void loadData(TaskList tasks) {
+    public static void loadData() {
+        TaskList tasks = new TaskList();
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(this.FILE_PATH);
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -75,6 +81,7 @@ public class Storage {
                 tasks.addTask(task);
             }
             sc.close();
+            return tasks;
         } catch (IOException e) {
             System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
         }

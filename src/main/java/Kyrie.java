@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Kyrie {
     public static void main(String[] args) {
         String logo = "Kyrie";
-        String separator = "\n\t____________________________________________________________\n\t";
+        
         String errorSeparator = KyrieException.errorSeparator;
         System.out.println("Shalom aleikhim, I am " + logo +"\nTell me what you desire" + separator);
 
+        Storage storage = new Storage("./data");
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
+        TaskList tasks = storage.loadData();
         String input;
         
-        Storage.createDirAndFile();
-        Storage.loadData(tasks);
+        storage.createDirAndFile();
         while (true) {
             try {
                 input = sc.nextLine();
@@ -79,7 +79,7 @@ public class Kyrie {
                 } else {
                     throw new KyrieException("Invalid command");
                 }
-                Storage.saveData(tasks);
+                storage.saveData(tasks);
             } catch (KyrieException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
