@@ -13,8 +13,8 @@ public class Kyrie {
         TaskList tasks = new TaskList();
         String input;
         
-        DataHandler.createDirAndFile();
-        DataHandler.loadData(tasks);
+        Storage.createDirAndFile();
+        Storage.loadData(tasks);
         while (true) {
             try {
                 input = sc.nextLine();
@@ -79,7 +79,7 @@ public class Kyrie {
                 } else {
                     throw new KyrieException("Invalid command");
                 }
-                DataHandler.saveData(tasks);
+                Storage.saveData(tasks);
             } catch (KyrieException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
