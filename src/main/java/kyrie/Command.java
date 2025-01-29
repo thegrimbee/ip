@@ -1,3 +1,5 @@
+package kyrie;
+
 public abstract class Command {
 
     public Command() {
