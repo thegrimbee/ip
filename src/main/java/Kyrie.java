@@ -1,5 +1,6 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
-
 
 public class Kyrie {
     public static void main(String[] args) {
@@ -7,9 +8,13 @@ public class Kyrie {
         String separator = "\n\t____________________________________________________________\n\t";
         String errorSeparator = KyrieException.errorSeparator;
         System.out.println("Shalom aleikhim, I am " + logo +"\nTell me what you desire" + separator);
+
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
         String input;
+        
+        DataHandler.createDirAndFile();
+        DataHandler.loadData(tasks);
         while (true) {
             try {
                 input = sc.nextLine();
@@ -74,6 +79,7 @@ public class Kyrie {
                 } else {
                     throw new KyrieException("Invalid command");
                 }
+                DataHandler.saveData(tasks);
             } catch (KyrieException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {

@@ -25,6 +25,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String toFileString() {
+        return this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.name;
+    }
+
     @Override
     public String toString() {
         return this.isDone ? "[X] " + this.name : "[ ] " + this.name;

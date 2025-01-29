@@ -56,4 +56,12 @@ public class TaskList {
     public Boolean isFull() {
         return this.taskCount == this.size;
     }
+
+    public String toFileString() {
+        String output = "";
+        for (Task task : this.tasks) {
+            output += task.toFileString() + "\n";
+        }
+        return output;
+    }
 }
