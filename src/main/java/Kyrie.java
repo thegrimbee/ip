@@ -21,7 +21,7 @@ public class Kyrie {
         } catch (IOException e) {
             System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
         }
-        
+
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
         String input;
