@@ -54,13 +54,13 @@ public class DataHandler {
                         if (parts.length != 4) {
                             throw new KyrieException("Invalid task format");
                         }
-                        task = new Deadline(parts[2], parts[3]);
+                        task = new Deadline(parts[2], new DateTime(parts[3]));
                         break;
                     case "EVENT":
                         if (parts.length != 4) {
                             throw new KyrieException("Invalid task format");
                         }
-                        task = new Event(parts[2], parts[3], parts[4]);
+                        task = new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
                         break;
                     default:
                         throw new KyrieException("Invalid task type");
