@@ -7,7 +7,7 @@ public class TaskListTest {
     @Test
     public void testTaskListConstructor() {
         TaskList taskList = new TaskList();
-        assertEquals(100, taskList.getSize());
+        assertEquals(100, taskList.getMaxSize());
         assertEquals(0, taskList.getTaskCount());
     }
 

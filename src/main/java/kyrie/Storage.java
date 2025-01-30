@@ -5,16 +5,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the task list.
+ */
 public class Storage {
     static String errorSeparator = KyrieException.errorSeparator;
     private final String DIR_PATH;
     private final String FILE_PATH;
 
+    /**
+     * Constructor for Storage.
+     * @param dirPath The directory path to save the task list to.
+     */
     public Storage(String dirPath) {
         DIR_PATH = dirPath;
         FILE_PATH = dirPath + "/tasks.txt";
     }
 
+    /**
+     * Creates the directory and file to save the task list to.
+     */
     public void createDirAndFile() {
         File dir = new File(this.DIR_PATH);
         if (!dir.exists()) {
@@ -30,6 +40,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list to the file.
+     * @param tasks The task list to save.
+     */
     public void saveData(TaskList tasks) {
         try {
             File file = new File(this.FILE_PATH);
@@ -41,6 +55,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from the file.
+     * @return The task list loaded from the file.
+     * @throws IOException If there is an error loading the file.
+     */
     public TaskList loadData() throws IOException {
         TaskList tasks = new TaskList();
         File file = new File(this.FILE_PATH);

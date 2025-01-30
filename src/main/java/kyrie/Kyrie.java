@@ -2,11 +2,18 @@ package kyrie;
 
 import java.io.IOException;
 
+/**
+ * Represents the Kyrie program.
+ */
 public class Kyrie {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for Kyrie.
+     * @param dirPath The directory path to save the task list to.
+     */
     public Kyrie(String dirPath) {
         this.ui = new Ui("Kyrie");
         this.storage = new Storage(dirPath);
@@ -18,6 +25,9 @@ public class Kyrie {
         }
     }
 
+    /**
+     * Runs the Kyrie program.
+     */
     public void run() {
         storage.createDirAndFile();
         ui.showWelcome();
@@ -38,6 +48,10 @@ public class Kyrie {
         ui.showGoodbye();
     }
 
+    /**
+     * Main method to run the Kyrie program.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Kyrie("./data").run();
     }
