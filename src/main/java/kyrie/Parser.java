@@ -60,6 +60,11 @@ public class Parser {
                     throw new KyrieException("Invalid task number");
                 }
                 return new DeleteCommand(Integer.parseInt(commandParts[1]));
+            case "find":
+                if (commandParts.length < 2) {
+                    throw new KyrieException("Invalid search query");
+                }
+                return new FindCommand(commandString.substring(5));
             default:
                 throw new KyrieException("It seems you have entered an invalid command");
         }
