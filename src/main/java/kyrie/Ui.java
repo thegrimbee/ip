@@ -17,6 +17,10 @@ public class Ui {
         System.out.println(separator);
     }
 
+    public static void showErrorSeparator() {
+        System.out.println(errorSeparator);
+    }
+
     public void showWelcome() {
         Ui.showSeparator();
         System.out.println("Shalom aleikhim, I am " + name + "\nTell me what you desire");
@@ -31,9 +35,9 @@ public class Ui {
     }
 
     public void showError(Exception e) {
-        Ui.showSeparator();
+        Ui.showErrorSeparator();
         System.out.println(e.getMessage());
-        Ui.showSeparator();
+        Ui.showErrorSeparator();
     }
 
     public String readCommand() {
