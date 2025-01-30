@@ -123,6 +123,11 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Finds tasks that contain the keyword.
+     * @param keyword The keyword to search for.
+     * @return The list of tasks that contain the keyword.
+     */
     public TaskList findTasks(String keyword) {
         TaskList foundTasks = new TaskList();
         for (Task task : this.tasks) {

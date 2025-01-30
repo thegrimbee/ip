@@ -122,6 +122,10 @@ public class Ui {
         this.respond("Noted, I have removed this task:\n\t" + task + "\nNow you have " + tasks.getTaskCount() + " tasks remaining");
     }
 
+    /**
+     * Shows the found tasks.
+     * @param tasks The tasks to show.
+     */
     public void showFoundTasks(TaskList tasks) {
         String response = "Here are the tasks matching your keyword:\n";
         for (int i = 1; i <= tasks.getTaskCount(); i++) {
