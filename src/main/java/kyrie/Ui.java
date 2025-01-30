@@ -73,4 +73,12 @@ public class Ui {
     public void showDeletedTask(Task task, TaskList tasks) {
         this.respond("Noted, I have removed this task:\n\t" + task + "\nNow you have " + tasks.getTaskCount() + " tasks remaining");
     }
+
+    public void showFoundTasks(TaskList tasks) {
+        String response = "Here are the tasks matching your keyword:\n";
+        for (int i = 1; i <= tasks.getTaskCount(); i++) {
+            response += i + ". " + tasks.getTask(i) + "\n";
+        }
+        this.respond(response);
+    }
 }
