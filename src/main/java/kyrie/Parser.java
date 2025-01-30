@@ -1,6 +1,15 @@
 package kyrie;
 
+/**
+ * Represents a parser to parse commands.
+ */
 public class Parser {
+    /**
+     * Parses the command string and returns the corresponding command object.
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the command string is invalid.
+     */
     public static Command parseCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         String command = commandParts[0];
@@ -55,6 +64,4 @@ public class Parser {
                 throw new KyrieException("It seems you have entered an invalid command");
         }
     }
-
-
 }
