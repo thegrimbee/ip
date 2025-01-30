@@ -1,7 +1,5 @@
 package kyrie;
 
-import java.util.Scanner;
-
 public class Parser {
     public static Command parseCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
