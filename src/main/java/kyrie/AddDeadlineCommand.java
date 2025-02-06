@@ -9,6 +9,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Constructor for AddDeadlineCommand.
+     * 
      * @param name The name of the deadline task.
      * @param deadline The deadline of the task.
      */
@@ -20,6 +21,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Executes the command to add a deadline task.
+     * 
      * @param storage The storage object to save the task list to.
      * @param ui The ui object to show the user the added task.
      * @param tasks The task list to add the task to.

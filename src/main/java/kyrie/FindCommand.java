@@ -8,6 +8,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for FindCommand.
+     * 
      * @param keyword The keyword to search for.
      */
     public FindCommand(String keyword) {
@@ -17,6 +18,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the command to find tasks.
+     * 
      * @param storage The storage object to save the task list to.
      * @param ui The ui object to show the user the found tasks.
      * @param tasks The task list to find the tasks from.

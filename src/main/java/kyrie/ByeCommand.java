@@ -13,6 +13,7 @@ public class ByeCommand extends Command {
 
     /**
      * Returns true as this is an exit command.
+     * 
      * @return True.
      */
     @Override
@@ -22,6 +23,7 @@ public class ByeCommand extends Command {
 
     /**
      * Executes the command to exit the program.
+     * 
      * @param storage The storage object to save the task list to.
      * @param ui The ui object to show the user the goodbye message.
      * @param tasks The task list to add the task to.

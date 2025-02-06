@@ -12,6 +12,7 @@ public abstract class Command {
 
     /**
      * Returns false as the default value for isExit.
+     * 
      * @return False.
      */
     public Boolean isExit() {
@@ -20,6 +21,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     * 
      * @param storage The storage object to save the task list to.
      * @param ui The ui object to show the user the added task.
      * @param tasks The task list to add the task to.

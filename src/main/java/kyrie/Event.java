@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
+     * 
      * @param name The name of the event task.
      * @param start The start time of the event.
      * @param end The end time of the event.
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event task, suitable for saving to file.
+     * 
      * @return The string representation of the event task, suitable for saving to file.
      */
     @Override
@@ -30,6 +32,7 @@ public class Event extends Task {
     
     /**
      * Returns the string representation of the event task.
+     * 
      * @return The string representation of the event task.
      */
     @Override

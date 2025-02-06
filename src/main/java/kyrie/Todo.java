@@ -6,6 +6,7 @@ package kyrie;
 public class Todo extends Task {
     /**
      * Constructor for Todo.
+     * 
      * @param name The name of the todo task.
      */
     public Todo(String name) {
@@ -14,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the todo task, suitable for saving to file.
+     * 
      * @return The string representation of the todo task, suitable for saving to file.
      */
     @Override
@@ -23,6 +25,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the todo task.
+     * 
      * @return The string representation of the todo task.
      */
     @Override

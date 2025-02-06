@@ -8,6 +8,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline.
+     * 
      * @param name The name of the deadline task.
      * @param deadline The deadline of the task.
      */
@@ -18,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the deadline of the task.
+     * 
      * @return The deadline of the task.
      */
     @Override
@@ -27,6 +29,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of the deadline task.
+     * 
      * @return The string representation of the deadline task.
      */
     @Override

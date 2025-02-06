@@ -3,7 +3,13 @@ package kyrie;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Represents a test class for Todo.
+ */
 public class TodoTest {
+    /**
+     * Tests the constructor for Todo.
+     */
     @Test
     public void testToDoConstructor() {
         Todo todo = new Todo("Sample Task");
@@ -15,6 +21,9 @@ public class TodoTest {
         assertEquals(false, todo.isDone());
     }
 
+    /**
+     * Tests the toString method for Todo.
+     */
     @Test
     public void testToString() {
         Todo todo = new Todo("Sample Task");
@@ -23,6 +32,9 @@ public class TodoTest {
         assertEquals("[T][X] Sample Task", todo.toString());
     }
 
+    /**
+     * Tests the toFileString method for Todo.
+     */
     @Test
     public void testToFileString() {
         Todo todo = new Todo("Sample Task");

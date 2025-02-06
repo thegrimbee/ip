@@ -6,6 +6,7 @@ package kyrie;
 public class Parser {
     /**
      * Parses the command string and returns the corresponding command object.
+     * 
      * @param commandString The command string to parse.
      * @return The corresponding command object.
      * @throws KyrieException If the command string is invalid.

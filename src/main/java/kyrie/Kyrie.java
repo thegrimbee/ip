@@ -12,6 +12,7 @@ public class Kyrie {
 
     /**
      * Constructor for Kyrie.
+     * 
      * @param dirPath The directory path to save the task list to.
      */
     public Kyrie(String dirPath) {
@@ -50,6 +51,7 @@ public class Kyrie {
 
     /**
      * Main method to run the Kyrie program.
+     * 
      * @param args The command line arguments.
      */
     public static void main(String[] args) {

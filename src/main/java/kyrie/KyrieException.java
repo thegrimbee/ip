@@ -8,6 +8,7 @@ public class KyrieException extends Exception {
     
     /**
      * Constructor for KyrieException.
+     * 
      * @param message The error message.
      */
     public KyrieException(String message) {

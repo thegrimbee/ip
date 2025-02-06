@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Constructor for Task.
+     * 
      * @param name The name of the task.
      * @param type The type of the task.
      */
@@ -35,6 +36,7 @@ public class Task {
 
     /**
      * Retrieves the name of the task.
+     * 
      * @return The name of the task.
      */
     public String getName() {
@@ -43,6 +45,7 @@ public class Task {
 
     /**
      * Checks if the task is done.
+     * 
      * @return True if the task is done, false otherwise.
      */
     public Boolean isDone() {
@@ -51,6 +54,7 @@ public class Task {
 
     /**
      * Returns the string representation of the task, suitable for saving to file.
+     * 
      * @return The string representation of the task, suitable for saving to file.
      */
     public String toFileString() {
@@ -59,6 +63,7 @@ public class Task {
 
     /**
      * Returns the string representation of the task.
+     * 
      * @return The string representation of the task.
      */
     @Override

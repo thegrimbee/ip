@@ -13,6 +13,7 @@ public class DateTime {
 
     /**
      * Constructor for DateTime.
+     * 
      * @param dateTime The date and time in the format dd/MM/yyyy HHmm.
      * @throws KyrieException If the date and time is in an invalid format.
      */
@@ -26,6 +27,7 @@ public class DateTime {
 
     /**
      * Returns the date and time in the format dd/MM/yyyy HHmm.
+     * 
      * @return The date and time in the format dd/MM/yyyy HHmm.
      */
     public String toInputFormatString() {
@@ -34,6 +36,7 @@ public class DateTime {
 
     /**
      * Returns the date and time in the format hh:mma, MMM dd yyyy.
+     * 
      * @return The date and time in the format hh:mma, MMM dd yyyy.
      */
     public String toString() {

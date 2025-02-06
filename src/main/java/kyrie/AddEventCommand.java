@@ -10,6 +10,7 @@ public class AddEventCommand extends Command {
 
     /**
      * Constructor for AddEventCommand.
+     * 
      * @param name The name of the event task.
      * @param from The start time of the event.
      * @param to The end time of the event.
@@ -23,6 +24,7 @@ public class AddEventCommand extends Command {
 
     /**
      * Executes the command to add an event task.
+     * 
      * @param storage The storage object to save the task list to.
      * @param ui The ui object to show the user the added task.
      * @param tasks The task list to add the task to.
