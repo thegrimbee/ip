@@ -1,15 +1,11 @@
 package kyrie;
 
-import java.util.Scanner;
-
 /**
  * Represents the user interface.
  */
 public class Ui {
-    private static String separator = "\n____________________________________________________________\n";
-    private static String errorSeparator = KyrieException.errorSeparator;
     private String name;
-    private Scanner sc;
+    private String response;
 
     /**
      * Constructor for Ui.
@@ -18,67 +14,42 @@ public class Ui {
      */
     public Ui(String name) {
         this.name = name;
-        this.sc = new Scanner(System.in);
     }
 
     /**
-     * Shows the separator.
-     */
-    public static void showSeparator() {
-        System.out.println(separator);
-    }
-
-    /**
-     * Shows the error separator.
-     */
-    public static void showErrorSeparator() {
-        System.out.println(errorSeparator);
-    }
-
-    /**
-     * Responds to the user.
+     * Gets the response.
      * 
-     * @param response The response to the user.
+     * @return response The response.
      */
-    private void displayResponse(String response) {
-        Ui.showSeparator();
-        System.out.println(response);
-        Ui.showSeparator();
-        System.out.println();
+    public String getResponse() {
+        return response;
+    }
+
+    /**
+     * Sets the response.
+     * 
+     * @param response The response to set.
+     */
+    private void setResponse(String response) {
+        this.response = response;
+    }
+
+    public void showError(Exception e) {
+        this.setResponse("There seems to be something wrong\n" + e.getMessage());
     }
 
     /**
      * Shows the welcome message.
      */
     public void showWelcome() {
-        this.displayResponse("Shalom aleikhim, I am " + name + "\nTell me what you desire");
+        this.setResponse("Shalom aleikhim, I am " + name + "\nTell me what you desire");
     }
 
     /**
      * Shows the goodbye message.
      */
     public void showGoodbye() {
-        this.displayResponse("Farewell, may you find what you seek");
-    }
-
-    /**
-     * Shows an error message.
-     * 
-     * @param e The exception that caused the error.
-     */
-    public void showError(Exception e) {
-        Ui.showErrorSeparator();
-        System.out.println(e.getMessage());
-        Ui.showErrorSeparator();
-    }
-
-    /**
-     * Reads the command from the user.
-     * 
-     * @return The command from the user.
-     */
-    public String readCommand() {
-        return sc.nextLine();
+        this.setResponse("Farewell, may you find what you seek");
     }
 
     /**
@@ -91,7 +62,7 @@ public class Ui {
         for (int i = 1; i <= tasks.getTaskCount(); i++) {
             response += i + ". " + tasks.getTask(i) + "\n";
         }
-        this.displayResponse(response);
+        this.setResponse(response);
     }
 
     /**
@@ -100,7 +71,7 @@ public class Ui {
      * @param task The task to show.
      */
     public void showMarkedTask(Task task) {
-        this.displayResponse("Excellent, you have finished this task:\n\t" + task);
+        this.setResponse("Excellent, you have finished this task:\n\t" + task);
     }
 
     /**
@@ -109,7 +80,7 @@ public class Ui {
      * @param task The task to show.
      */
     public void showUnmarkedTask(Task task) {
-        this.displayResponse("You have undone your choice, that task is no longer marked finished:\n\t" + task);
+        this.setResponse("You have undone your choice, that task is no longer marked finished:\n\t" + task);
     }
 
     /**
@@ -118,7 +89,7 @@ public class Ui {
      * @param task The task to show.
      */
     public void showAddedTask(Task task) {
-        this.displayResponse("added a new task: " + task);
+        this.setResponse("added a new task: " + task);
     }
 
     /**
@@ -128,19 +99,20 @@ public class Ui {
      * @param tasks The task list to show the number of tasks remaining.
      */
     public void showDeletedTask(Task task, TaskList tasks) {
-        this.displayResponse("Noted, I have removed this task:\n\t" + task + "\nNow you have " + tasks.getTaskCount() + " tasks remaining");
+        this.setResponse("Noted, I have removed this task:\n\t" + task + "\nNow you have " + tasks.getTaskCount() + " tasks remaining");
     }
 
     /**
      * Shows the found tasks.
      * 
      * @param tasks The tasks to show.
+     * @return The found tasks.
      */
     public void showFoundTasks(TaskList tasks) {
         String response = "Here are the tasks matching your keyword:\n";
         for (int i = 1; i <= tasks.getTaskCount(); i++) {
             response += i + ". " + tasks.getTask(i) + "\n";
         }
-        this.displayResponse(response);
+        this.setResponse(response);
     }
 }

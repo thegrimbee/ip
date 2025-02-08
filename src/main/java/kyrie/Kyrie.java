@@ -19,6 +19,7 @@ public class Kyrie {
         this.ui = new Ui("Kyrie");
         this.storage = new Storage(dirPath);
         try {
+            this.run();
             this.tasks = storage.loadData();
         } catch (IOException e) {
             ui.showError(e);
@@ -31,22 +32,32 @@ public class Kyrie {
      */
     public void run() {
         storage.createDirAndFile();
-        ui.showWelcome();
-        while (true) {
-            try {
-                String commandString = ui.readCommand();
-                Command command = Parser.parseCommand(commandString);
-                command.execute(storage, ui, tasks);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (KyrieException e) {
-                ui.showError(e);
-            } catch (Exception e) {
-                ui.showError(new KyrieException("An unknown error occurred"));
-            }
+    }
+
+    /**
+     * Gets the response from Kyrie.
+     * 
+     * @param input The input from the user.
+     * @return The response from Kyrie.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            command.execute(storage, ui, tasks);
+            return ui.getResponse();
+        } catch (KyrieException e) {
+            return e.getMessage();
         }
-        ui.showGoodbye();
+    } 
+
+    /**
+     * Gets the welcome message from Kyrie.
+     * 
+     * @return The welcome message from Kyrie.
+     */
+    public String getWelcomeMessage() {
+        ui.showWelcome();
+        return ui.getResponse();
     }
 
     /**
