@@ -16,6 +16,7 @@ public class Kyrie {
      * @param dirPath The directory path to save the task list to.
      */
     public Kyrie(String dirPath) {
+        assert dirPath != null : "Directory path cannot be null";
         this.ui = new Ui("Kyrie");
         this.storage = new Storage(dirPath);
         try {
@@ -46,6 +47,8 @@ public class Kyrie {
             command.execute(storage, ui, tasks);
             return ui.getResponse();
         } catch (KyrieException e) {
+            return e.getMessage();
+        } catch (Exception e) {
             return e.getMessage();
         }
     } 

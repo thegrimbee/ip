@@ -13,6 +13,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(Integer index) {
         super();
+        assert index > 0 : "Index of task to mark as done must be greater than 0";
         this.index = index;
     }
 

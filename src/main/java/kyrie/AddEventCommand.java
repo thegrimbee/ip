@@ -17,6 +17,7 @@ public class AddEventCommand extends Command {
      */
     public AddEventCommand(String name, DateTime from, DateTime to) {
         super();
+        assert name != null : "Name of event cannot be null";
         this.name = name;
         this.from = from;
         this.to = to;

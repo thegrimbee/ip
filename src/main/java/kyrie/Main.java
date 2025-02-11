@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private Kyrie kyrie = new Kyrie("./data");
 
+    /**
+     * Starts the GUI.
+     * 
+     * @param stage The stage to start the GUI on.
+     */
     @Override
     public void start(Stage stage) {
         try {

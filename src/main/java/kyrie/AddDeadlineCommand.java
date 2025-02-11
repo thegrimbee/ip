@@ -15,6 +15,7 @@ public class AddDeadlineCommand extends Command {
      */
     public AddDeadlineCommand(String name, DateTime deadline) {
         super();
+        assert name != null : "Name of deadline cannot be null";
         this.name = name;
         this.deadline = deadline;
     }

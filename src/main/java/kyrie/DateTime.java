@@ -19,6 +19,7 @@ public class DateTime {
      */
     public DateTime(String dateTime) throws KyrieException {
         try {
+            assert dateTime != null : "Date/time cannot be null";
             this.dateTime = LocalDateTime.parse(dateTime, formatter);
         } catch (Exception e) {
             throw new KyrieException("Invalid date/time format. Please use the format dd/MM/yyyy HHmm");
