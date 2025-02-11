@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private int size = 100;
+    private static int SIZE = 100;
     private int taskCount = 0;
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -61,7 +61,7 @@ public class TaskList {
      * @return The maximum size of the task list.
      */
     public int getMaxSize() {
-        return this.size;
+        return TaskList.SIZE;
     }
 
     /**
@@ -107,7 +107,7 @@ public class TaskList {
      * @return True if the task list is full, false otherwise.
      */
     public Boolean isFull() {
-        return this.taskCount == this.size;
+        return this.taskCount == TaskList.SIZE;
     }
 
     /**
