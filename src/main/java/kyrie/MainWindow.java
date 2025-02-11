@@ -34,8 +34,8 @@ public class MainWindow extends AnchorPane {
      * 
      * @param k The Kyrie program to be injected.
      */
-    public void setKyrie(Kyrie k) {
-        kyrie = k;
+    public void setKyrie(Kyrie kyrie) {
+        this.kyrie = kyrie;
         dialogContainer.getChildren().addAll(
             DialogBox.getKyrieDialog(kyrie.getWelcomeMessage(), dukeImage)
         );

@@ -19,19 +19,12 @@ public class Kyrie {
         this.ui = new Ui("Kyrie");
         this.storage = new Storage(dirPath);
         try {
-            this.run();
+            this.storage.createDirAndFile();
             this.tasks = storage.loadData();
         } catch (IOException e) {
             ui.showError(e);
             this.tasks = new TaskList();
         }
-    }
-
-    /**
-     * Runs the Kyrie program.
-     */
-    public void run() {
-        storage.createDirAndFile();
     }
 
     /**
@@ -58,16 +51,5 @@ public class Kyrie {
     public String getWelcomeMessage() {
         ui.showWelcome();
         return ui.getResponse();
-    }
-
-    /**
-     * Main method to run the Kyrie program.
-     * 
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Kyrie("./data").run();
-    }
-        
-        
+    }   
 }
