@@ -13,6 +13,7 @@ public class AddTodoCommand extends Command {
      */
     public AddTodoCommand(String name) {
         super();
+        assert name != null : "Name of todo cannot be null";
         this.name = name;
     }
 

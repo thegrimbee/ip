@@ -13,6 +13,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword) {
         super();
+        assert keyword != null : "Keyword to find tasks cannot be null";
         this.keyword = keyword;
     }
 

@@ -4,7 +4,7 @@ package kyrie;
  * Represents an exception in Kyrie.
  */
 public class KyrieException extends Exception {
-    public static String errorSeparator = "\n\t__________________________ERROR_____________________________\n\t";
+    public static String errorMessage = "There seems to be something wrong: \n";
     
     /**
      * Constructor for KyrieException.
@@ -12,6 +12,6 @@ public class KyrieException extends Exception {
      * @param message The error message.
      */
     public KyrieException(String message) {
-        super(errorSeparator + "There seems to be something wrong: " + message + errorSeparator);
+        super(errorMessage + message);
     }
 }

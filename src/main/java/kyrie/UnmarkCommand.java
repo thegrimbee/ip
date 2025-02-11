@@ -13,6 +13,7 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(Integer index) {
         super();
+        assert index > 0 : "Index of task to unmark must be greater than 0";
         this.index = index;
     }
 

@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         super();
+        assert index > 0 : "Index of task to delete must be greater than 0";
         this.index = index;
     }
 
