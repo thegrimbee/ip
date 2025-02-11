@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Represents the storage of the task list.
  */
 public class Storage {
-    static String errorSeparator = KyrieException.errorSeparator;
     private final String DIR_PATH;
     private final String FILE_PATH;
 
@@ -37,7 +36,7 @@ public class Storage {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
+            System.out.println("There seems to be something wrong: " + e);
         }
     }
 
@@ -53,7 +52,7 @@ public class Storage {
             writer.write(tasks.toFileString());
             writer.close();
         } catch (IOException e) {
-            System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
+            System.out.println("There seems to be something wrong: " + e);
         }
     }
 
@@ -95,7 +94,7 @@ public class Storage {
                     throw new KyrieException("Invalid task type");
                 }
             } catch (KyrieException e) {
-                System.out.println(errorSeparator + "There seems to be something wrong: " + e + errorSeparator);
+                System.out.println("There seems to be something wrong: " + e);
                 continue;
             }
             if (parts[1].equals("1")) {
