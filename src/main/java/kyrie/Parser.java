@@ -10,7 +10,7 @@ public class Parser {
      * @param commandString The command string to parse.
      * @return The corresponding command object.
      */
-    public static Command parseByeCommand(String commandString) {
+    public static ByeCommand parseByeCommand(String commandString) {
         return new ByeCommand();
     }
 
@@ -20,7 +20,7 @@ public class Parser {
      * @param commandString The command string to parse.
      * @return The corresponding command object.
      */
-    public static Command parseListCommand(String commandString) {
+    public static ListCommand parseListCommand(String commandString) {
         return new ListCommand();
     }
 
@@ -31,7 +31,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task number is invalid.
      */
-    public static Command parseMarkCommand(String commandString) throws KyrieException {
+    public static MarkCommand parseMarkCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
             throw new KyrieException("Invalid task number");
@@ -46,7 +46,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task number is invalid.
      */
-    public static Command parseUnmarkCommand(String commandString) throws KyrieException {
+    public static UnmarkCommand parseUnmarkCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
             throw new KyrieException("Invalid task number");
@@ -61,7 +61,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task description is invalid.
      */
-    public static Command parseTodoCommand(String commandString) throws KyrieException {
+    public static AddTodoCommand parseTodoCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
             throw new KyrieException("Invalid task description");
@@ -76,7 +76,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task description is invalid.
      */
-    public static Command parseDeadlineCommand(String commandString) throws KyrieException {
+    public static AddDeadlineCommand parseDeadlineCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 4) {
             throw new KyrieException("Invalid task description");
@@ -95,7 +95,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task description is invalid.
      */
-    public static Command parseEventCommand(String commandString) throws KyrieException {
+    public static AddEventCommand parseEventCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 5) {
             throw new KyrieException("Invalid task description");
@@ -118,7 +118,7 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the task number is invalid.
      */
-    public static Command parseDeleteCommand(String commandString) throws KyrieException {
+    public static DeleteCommand parseDeleteCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
             throw new KyrieException("Invalid task number");
@@ -133,12 +133,20 @@ public class Parser {
      * @return The corresponding command object.
      * @throws KyrieException If the search query is invalid.
      */
-    public static Command parseFindCommand(String commandString) throws KyrieException {
+    public static FindCommand parseFindCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 2) {
             throw new KyrieException("Invalid search query");
         }
         return new FindCommand(commandString.substring(5));
+    }
+
+    public static TagCommand parseTagCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length < 3) {
+            throw new KyrieException("Invalid tag query");
+        }
+        return new TagCommand(Integer.parseInt(commandParts[1]), commandParts[2]);
     }
 
     /**
@@ -181,6 +189,8 @@ public class Parser {
             return parseDeleteCommand(commandString);
         case "find":
             return parseFindCommand(commandString);
+        case "tag":
+            return parseTagCommand(commandString);
         default:
             return parseInvalidCommand(commandString);
         }

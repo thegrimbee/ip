@@ -18,6 +18,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor for Deadline.
+     * 
+     * @param name The name of the deadline task.
+     * @param deadline The deadline of the task.
+     * @param tags The tags of the deadline task.
+     */
+    public Deadline(String name, DateTime deadline, TagList tags) {
+        super(name, TaskType.DEADLINE, tags);
+        this.deadline = deadline;
+    }
+
+    /**
      * Returns the deadline of the task.
      * 
      * @return The deadline of the task.

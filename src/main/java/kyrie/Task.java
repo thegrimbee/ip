@@ -7,6 +7,7 @@ public class Task {
     protected Boolean isDone;
     protected String name;
     protected TaskType type;
+    protected TagList tags;
 
     /**
      * Constructor for Task.
@@ -19,6 +20,22 @@ public class Task {
         this.name = name;
         this.isDone = false;
         this.type = type;
+        this.tags = new TagList();
+    }
+
+    /**
+     * Constructor for Task.
+     * 
+     * @param name The name of the task.
+     * @param type The type of the task.
+     * @param tags The tags of the task.
+     */
+    public Task(String name, TaskType type, TagList tags) {
+        assert name != null : "Name of task cannot be null";
+        this.name = name;
+        this.isDone = false;
+        this.type = type;
+        this.tags = tags;
     }
 
     /**
@@ -54,12 +71,25 @@ public class Task {
     }
 
     /**
+     * Retrieves the type of the task.
+     * 
+     * @return The type of the task.
+     */
+    public void addTag(Tag tag) {
+        this.tags.addTag(tag);
+    }
+
+    /**
      * Returns the string representation of the task, suitable for saving to file.
      * 
      * @return The string representation of the task, suitable for saving to file.
      */
     public String toFileString() {
-        return this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.name;
+        String fileString = this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.name;
+        if (this.tags.getSize() > 0) {
+            fileString += " | " + this.tags;
+        }
+        return fileString;
     }
 
     /**
@@ -69,6 +99,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.isDone ? "[X] " + this.name : "[ ] " + this.name;
+        return (this.isDone ? "[X] " : "[ ] ") + this.name + " " + this.tags;
     }
 }

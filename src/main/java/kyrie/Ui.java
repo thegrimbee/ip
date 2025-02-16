@@ -115,4 +115,13 @@ public class Ui {
         }
         this.setResponse(response);
     }
+
+    /**
+     * Shows the tagged task.
+     * 
+     * @param task The task to show.
+     */
+    public void showTaggedTask(Task task) {
+        this.setResponse("You have successfully tagged this task: " + task);
+    }
 }

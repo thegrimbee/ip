@@ -83,6 +83,82 @@ public class Storage {
     }
 
     /**
+     * Converts a string of tags to a TagList.
+     * 
+     * @param tagString The string of tags.
+     * @return The corresponding TagList.
+     */
+    public TagList toTagList(String tagString) {
+        TagList tags = new TagList();
+        String[] tagArray = tagString.split(" ");
+        for (String tag : tagArray) {
+            tags.addTag(new Tag(tag));
+        }
+        return tags;
+    }
+
+    /**
+     * Parses a line from the file and returns the corresponding todo task.
+     * 
+     * @param line The line to parse.
+     * @return The corresponding todo task.
+     * @throws KyrieException If the task format is invalid.
+     */
+    public Todo parseTodoTask(String line) throws KyrieException {
+        String[] parts = line.split(" \\| ");
+        if (parts.length < 3 || parts.length > 4) {
+            throw new KyrieException("Invalid task format");
+        } else if (parts.length == 3) {
+            return new Todo(parts[2]);
+        }
+        return new Todo(parts[2], toTagList(parts[3]));
+    }
+
+    /**
+     * Parses a line from the file and returns the corresponding deadline task.
+     * 
+     * @param line The line to parse.
+     * @return The corresponding deadline task.
+     * @throws KyrieException If the task format is invalid.
+     */
+    public Deadline parseDeadlineTask(String line) throws KyrieException {
+        String[] parts = line.split(" \\| ");
+        if (parts.length < 4 || parts.length > 5) {
+            throw new KyrieException("Invalid task format");
+        } else if (parts.length == 4) {
+            return new Deadline(parts[2], new DateTime(parts[3]));
+        }
+        return new Deadline(parts[2], new DateTime(parts[4]), toTagList(parts[3]));
+    }
+
+    /**
+     * Parses a line from the file and returns the corresponding event task.
+     * 
+     * @param line The line to parse.
+     * @return The corresponding event task.
+     * @throws KyrieException If the task format is invalid.
+     */
+    public Event parseEventTask(String line) throws KyrieException {
+        String[] parts = line.split(" \\| ");
+        if (parts.length < 5 || parts.length > 6) {
+            throw new KyrieException("Invalid task format");
+        } else if (parts.length == 5) {
+            return new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
+        }
+        return new Event(parts[2], new DateTime(parts[4]), new DateTime(parts[5]), toTagList(parts[3]));
+    }
+
+    /**
+     * Parses a line from the file and returns an invalid task.
+     * @param line
+     * @return The corresponding invalid task.
+     * @throws KyrieException
+     */
+    public Task parseInvalidTask(String line) throws KyrieException {
+        throw new KyrieException("Invalid task format");
+    }
+
+    /**
      * Parses a line from the file and returns the corresponding task.
      * 
      * @param line The line to parse.
@@ -93,22 +169,13 @@ public class Storage {
         String[] parts = line.split(" \\| ");
         switch (parts[0]) {
             case "TODO":
-                if (parts.length != 3) {
-                    throw new KyrieException("Invalid task format");
-                }
-                return new Todo(parts[2]);
+                return parseTodoTask(line);
             case "DEADLINE":
-                if (parts.length != 4) {
-                    throw new KyrieException("Invalid task format");
-                }
-                return new Deadline(parts[2], new DateTime(parts[3]));
+                return parseDeadlineTask(line);
             case "EVENT":
-                if (parts.length != 5) {
-                    throw new KyrieException("Invalid task format");
-                }
-                return new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
+                return parseEventTask(line);
             default:
-                throw new KyrieException("Invalid task type");
+                return parseInvalidTask(line);
         }
     }
 
