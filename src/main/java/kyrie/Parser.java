@@ -5,6 +5,154 @@ package kyrie;
  */
 public class Parser {
     /**
+     * Parses the Bye command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     */
+    public static Command parseByeCommand(String commandString) {
+        return new ByeCommand();
+    }
+
+    /**
+     * Parses the List command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     */
+    public static Command parseListCommand(String commandString) {
+        return new ListCommand();
+    }
+
+    /**
+     * Parses the Mark command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task number is invalid.
+     */
+    public static Command parseMarkCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length != 2) {
+            throw new KyrieException("Invalid task number");
+        }
+        return new MarkCommand(Integer.parseInt(commandParts[1]));
+    }
+
+    /**
+     * Parses the Unmark command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task number is invalid.
+     */
+    public static Command parseUnmarkCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length != 2) {
+            throw new KyrieException("Invalid task number");
+        }
+        return new UnmarkCommand(Integer.parseInt(commandParts[1]));
+    }
+
+    /**
+     * Parses the Todo command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task description is invalid.
+     */
+    public static Command parseTodoCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length != 2) {
+            throw new KyrieException("Invalid task description");
+        }
+        return new AddTodoCommand(commandParts[1]);
+    }
+
+    /**
+     * Parses the Deadline command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task description is invalid.
+     */
+    public static Command parseDeadlineCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length < 4) {
+            throw new KyrieException("Invalid task description");
+        }
+        String[] dateTimeParts = commandString.split(" /by ");
+        if (dateTimeParts.length != 2) {
+            throw new KyrieException("Invalid task description");
+        }
+        return new AddDeadlineCommand(commandParts[1], new DateTime(dateTimeParts[1]));
+    }
+
+    /**
+     * Parses the Event command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task description is invalid.
+     */
+    public static Command parseEventCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length < 5) {
+            throw new KyrieException("Invalid task description");
+        }
+        String[] dateTimeParts = commandString.split(" /from ");
+        if (dateTimeParts.length != 2) {
+            throw new KyrieException("Invalid task description");
+        }
+        String[] periodParts = dateTimeParts[1].split(" /to ");
+        if (periodParts.length != 2) {
+            throw new KyrieException("Invalid task description");
+        }
+        return new AddEventCommand(commandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
+    }
+
+    /**
+     * Parses the Delete command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the task number is invalid.
+     */
+    public static Command parseDeleteCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length != 2) {
+            throw new KyrieException("Invalid task number");
+        }
+        return new DeleteCommand(Integer.parseInt(commandParts[1]));
+    }
+
+    /**
+     * Parses the Find command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the search query is invalid.
+     */
+    public static Command parseFindCommand(String commandString) throws KyrieException {
+        String[] commandParts = commandString.split(" ");
+        if (commandParts.length < 2) {
+            throw new KyrieException("Invalid search query");
+        }
+        return new FindCommand(commandString.substring(5));
+    }
+
+    /**
+     * Parses the Invalid command string and returns the corresponding command object.
+     * 
+     * @param commandString The command string to parse.
+     * @return The corresponding command object.
+     * @throws KyrieException If the command string is invalid.
+     */
+    public static Command parseInvalidCommand(String commandString) throws KyrieException {
+        throw new KyrieException("It seems you have entered an invalid command");
+    }
+
+    /**
      * Parses the command string and returns the corresponding command object.
      * 
      * @param commandString The command string to parse.
@@ -16,58 +164,25 @@ public class Parser {
         String command = commandParts[0];
         switch (command) {
         case "bye":
-            return new ByeCommand();
+            return parseByeCommand(commandString);
         case "list":
-            return new ListCommand();
+            return parseListCommand(commandString);
         case "mark":
-            if (commandParts.length != 2) {
-                throw new KyrieException("Invalid task number");
-            }
-            return new MarkCommand(Integer.parseInt(commandParts[1]));
+            return parseMarkCommand(commandString);
         case "unmark":
-            if (commandParts.length != 2) {
-                throw new KyrieException("Invalid task number");
-            }
-            return new UnmarkCommand(Integer.parseInt(commandParts[1]));
+            return parseUnmarkCommand(commandString);
         case "todo":
-            if (commandParts.length != 2) {
-                throw new KyrieException("Invalid task description");
-            }
-            return new AddTodoCommand(commandParts[1]);
+            return parseTodoCommand(commandString);
         case "deadline":
-            if (commandParts.length < 4) {
-                throw new KyrieException("Invalid task description");
-            }
-            String[] dateTimeParts = commandString.split(" /by ");
-            if (dateTimeParts.length != 2) {
-                throw new KyrieException("Invalid task description");
-            }
-            return new AddDeadlineCommand(commandParts[1], new DateTime(dateTimeParts[1]));
+            return parseDeadlineCommand(commandString);
         case "event":
-            if (commandParts.length < 5) {
-                throw new KyrieException("Invalid task description");
-            }
-            String[] dateTimeParts2 = commandString.split(" /from ");
-            if (dateTimeParts2.length != 2) {
-                throw new KyrieException("Invalid task description");
-            }
-            String[] periodParts = dateTimeParts2[1].split(" /to ");
-            if (periodParts.length != 2) {
-                throw new KyrieException("Invalid task description");
-            }
-            return new AddEventCommand(commandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
+            return parseEventCommand(commandString);
         case "delete":
-            if (commandParts.length != 2) {
-                throw new KyrieException("Invalid task number");
-            }
-            return new DeleteCommand(Integer.parseInt(commandParts[1]));
+            return parseDeleteCommand(commandString);
         case "find":
-            if (commandParts.length < 2) {
-                throw new KyrieException("Invalid search query");
-            }
-            return new FindCommand(commandString.substring(5));
+            return parseFindCommand(commandString);
         default:
-            throw new KyrieException("It seems you have entered an invalid command");
+            return parseInvalidCommand(commandString);
         }
     }
 }

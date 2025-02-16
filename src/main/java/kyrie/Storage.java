@@ -68,41 +68,58 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            String[] parts = line.split(" \\| ");
-            Task task;
             try {
-                switch (parts[0]) {
-                case "TODO":
-                    if (parts.length != 3) {
-                        throw new KyrieException("Invalid task format");
-                    }
-                    task = new Todo(parts[2]);
-                    break;
-                case "DEADLINE":
-                    if (parts.length != 4) {
-                        throw new KyrieException("Invalid task format");
-                    }
-                    task = new Deadline(parts[2], new DateTime(parts[3]));
-                    break;
-                case "EVENT":
-                    if (parts.length != 5) {
-                        throw new KyrieException("Invalid task format");
-                    }
-                    task = new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
-                    break;
-                default:
-                    throw new KyrieException("Invalid task type");
+                Task task = parseTask(line);
+                if (isTaskDone(line)) {
+                    task.markAsDone();
                 }
+                tasks.addTask(task);
             } catch (KyrieException e) {
                 System.out.println("There seems to be something wrong: " + e);
-                continue;
             }
-            if (parts[1].equals("1")) {
-                task.markAsDone();
-            }
-            tasks.addTask(task);
         }
         sc.close();
         return tasks;
+    }
+
+    /**
+     * Parses a line from the file and returns the corresponding task.
+     * 
+     * @param line The line to parse.
+     * @return The corresponding task.
+     * @throws KyrieException If the task format is invalid.
+     */
+    private Task parseTask(String line) throws KyrieException {
+        String[] parts = line.split(" \\| ");
+        switch (parts[0]) {
+            case "TODO":
+                if (parts.length != 3) {
+                    throw new KyrieException("Invalid task format");
+                }
+                return new Todo(parts[2]);
+            case "DEADLINE":
+                if (parts.length != 4) {
+                    throw new KyrieException("Invalid task format");
+                }
+                return new Deadline(parts[2], new DateTime(parts[3]));
+            case "EVENT":
+                if (parts.length != 5) {
+                    throw new KyrieException("Invalid task format");
+                }
+                return new Event(parts[2], new DateTime(parts[3]), new DateTime(parts[4]));
+            default:
+                throw new KyrieException("Invalid task type");
+        }
+    }
+
+    /**
+     * Checks if the task is marked as done.
+     * 
+     * @param line The line to check.
+     * @return True if the task is marked as done, false otherwise.
+     */
+    private boolean isTaskDone(String line) {
+        String[] parts = line.split(" \\| ");
+        return parts[1].equals("1");
     }
 }
