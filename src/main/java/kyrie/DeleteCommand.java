@@ -5,6 +5,7 @@ package kyrie;
  */
 public class DeleteCommand extends Command {
     private int index;
+    public static final String COMMAND_WORD = "delete";
 
     /**
      * Constructor for DeleteCommand.

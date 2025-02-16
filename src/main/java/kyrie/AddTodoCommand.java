@@ -5,6 +5,7 @@ package kyrie;
  */
 public class AddTodoCommand extends Command {
     private String name;
+    public static final String COMMAND_WORD = "todo";
 
     /**
      * Constructor for AddTodoCommand.

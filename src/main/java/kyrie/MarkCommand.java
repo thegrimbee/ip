@@ -5,6 +5,7 @@ package kyrie;
  */
 public class MarkCommand extends Command {
     private Integer index;
+    public static final String COMMAND_WORD = "mark";
 
     /**
      * Constructor for MarkCommand.

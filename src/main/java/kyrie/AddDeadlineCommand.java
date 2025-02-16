@@ -6,6 +6,7 @@ package kyrie;
 public class AddDeadlineCommand extends Command {
     private String name;
     private DateTime deadline;
+    public static final String COMMAND_WORD = "deadline";
 
     /**
      * Constructor for AddDeadlineCommand.

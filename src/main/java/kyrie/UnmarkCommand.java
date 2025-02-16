@@ -5,6 +5,7 @@ package kyrie;
  */
 public class UnmarkCommand extends Command {
     private Integer index;
+    public static final String COMMAND_WORD = "unmark";
 
     /**
      * Constructor for UnmarkCommand.
@@ -16,7 +17,7 @@ public class UnmarkCommand extends Command {
         assert index > 0 : "Index of task to unmark must be greater than 0";
         this.index = index;
     }
-
+    
     /**
      * Executes the command to unmark a task as done.
      * 

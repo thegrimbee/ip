@@ -4,6 +4,8 @@ package kyrie;
  * Represents a command to list all tasks.
  */
 public class ListCommand extends Command {
+    public static final String COMMAND_WORD = "list";
+
     /**
      * Constructor for ListCommand.
      */

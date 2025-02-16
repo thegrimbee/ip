@@ -38,6 +38,9 @@ public class Kyrie {
         try {
             Command command = Parser.parseCommand(input);
             command.execute(storage, ui, tasks);
+            if (command.isExit()) {
+                System.exit(0);
+            }
             return ui.getResponse();
         } catch (KyrieException e) {
             return e.getMessage();

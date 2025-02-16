@@ -4,6 +4,8 @@ package kyrie;
  * Represents a command to exit the program.
  */
 public class ByeCommand extends Command {
+    public static final String COMMAND_WORD = "bye";
+
     /**
      * Constructor for ByeCommand.
      */

@@ -5,6 +5,7 @@ package kyrie;
  */
 public class FindCommand extends Command {
     private String keyword;
+    public static final String COMMAND_WORD = "find";
 
     /**
      * Constructor for FindCommand.

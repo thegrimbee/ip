@@ -171,25 +171,25 @@ public class Parser {
         String[] commandParts = commandString.split(" ");
         String command = commandParts[0];
         switch (command) {
-        case "bye":
+        case ByeCommand.COMMAND_WORD:
             return parseByeCommand(commandString);
-        case "list":
+        case ListCommand.COMMAND_WORD:
             return parseListCommand(commandString);
-        case "mark":
+        case MarkCommand.COMMAND_WORD:
             return parseMarkCommand(commandString);
-        case "unmark":
+        case UnmarkCommand.COMMAND_WORD:
             return parseUnmarkCommand(commandString);
-        case "todo":
+        case AddTodoCommand.COMMAND_WORD:
             return parseTodoCommand(commandString);
-        case "deadline":
+        case AddDeadlineCommand.COMMAND_WORD:
             return parseDeadlineCommand(commandString);
-        case "event":
+        case AddEventCommand.COMMAND_WORD:
             return parseEventCommand(commandString);
-        case "delete":
+        case DeleteCommand.COMMAND_WORD:
             return parseDeleteCommand(commandString);
-        case "find":
+        case FindCommand.COMMAND_WORD:
             return parseFindCommand(commandString);
-        case "tag":
+        case TagCommand.COMMAND_WORD:
             return parseTagCommand(commandString);
         default:
             return parseInvalidCommand(commandString);

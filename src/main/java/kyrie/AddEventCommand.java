@@ -7,6 +7,7 @@ public class AddEventCommand extends Command {
     private String name;
     private DateTime from;
     private DateTime to;
+    public static final String COMMAND_WORD = "event";
 
     /**
      * Constructor for AddEventCommand.

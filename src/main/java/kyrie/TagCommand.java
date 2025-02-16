@@ -4,8 +4,9 @@ package kyrie;
  * Represents a tag command.
  */
 public class TagCommand extends Command {
-   private String tagName;
-   private Integer taskIndex;
+    private String tagName;
+    private Integer taskIndex;
+    public static final String COMMAND_WORD = "tag";
    
     /**
      * Constructor for TagCommand.
