@@ -34,7 +34,7 @@ public class Parser {
     public static MarkCommand parseMarkCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
-            throw new KyrieException("Invalid task number");
+            throw new KyrieException("Invalid command format, please follow the format: mark <task number>");
         }
         return new MarkCommand(Integer.parseInt(commandParts[1]));
     }
@@ -49,7 +49,7 @@ public class Parser {
     public static UnmarkCommand parseUnmarkCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
-            throw new KyrieException("Invalid task number");
+            throw new KyrieException("Invalid command format, please follow the format: unmark <task number>");
         }
         return new UnmarkCommand(Integer.parseInt(commandParts[1]));
     }
@@ -64,7 +64,7 @@ public class Parser {
     public static AddTodoCommand parseTodoCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: todo <description>");
         }
         return new AddTodoCommand(commandParts[1]);
     }
@@ -79,11 +79,11 @@ public class Parser {
     public static AddDeadlineCommand parseDeadlineCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 4) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: deadline <description> /by <date time>");
         }
         String[] dateTimeParts = commandString.split(" /by ");
         if (dateTimeParts.length != 2) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: deadline <description> /by <date time>");
         }
         return new AddDeadlineCommand(commandParts[1], new DateTime(dateTimeParts[1]));
     }
@@ -98,15 +98,15 @@ public class Parser {
     public static AddEventCommand parseEventCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 5) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
         }
         String[] dateTimeParts = commandString.split(" /from ");
         if (dateTimeParts.length != 2) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
         }
         String[] periodParts = dateTimeParts[1].split(" /to ");
         if (periodParts.length != 2) {
-            throw new KyrieException("Invalid task description");
+            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
         }
         return new AddEventCommand(commandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
     }
@@ -121,7 +121,7 @@ public class Parser {
     public static DeleteCommand parseDeleteCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length != 2) {
-            throw new KyrieException("Invalid task number");
+            throw new KyrieException("Invalid command format, please follow the format: delete <task number>");
         }
         return new DeleteCommand(Integer.parseInt(commandParts[1]));
     }
@@ -136,15 +136,15 @@ public class Parser {
     public static FindCommand parseFindCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
         if (commandParts.length < 2) {
-            throw new KyrieException("Invalid search query");
+            throw new KyrieException("Invalid command format, please follow the format: find <keyword>");
         }
         return new FindCommand(commandString.substring(5));
     }
 
     public static TagCommand parseTagCommand(String commandString) throws KyrieException {
         String[] commandParts = commandString.split(" ");
-        if (commandParts.length < 3) {
-            throw new KyrieException("Invalid tag query");
+        if (commandParts.length != 3) {
+            throw new KyrieException("Invalid command format, please follow the format: tag <task number> <tag>");
         }
         return new TagCommand(Integer.parseInt(commandParts[1]), commandParts[2]);
     }

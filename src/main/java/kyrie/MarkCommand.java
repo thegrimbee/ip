@@ -26,7 +26,10 @@ public class MarkCommand extends Command {
      * @param tasks The task list to mark the task from.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public void execute(Storage storage, Ui ui, TaskList tasks) throws KyrieException {
+        if (index > tasks.getTaskCount() || index < 1) {
+            throw new KyrieException("Task does not exist in your list");
+        }
         tasks.markTaskAsDone(this.index);
         ui.showMarkedTask(tasks.getTask(this.index));
         storage.saveData(tasks);

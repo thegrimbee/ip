@@ -26,7 +26,10 @@ public class UnmarkCommand extends Command {
      * @param tasks The task list to unmark the task from.
      */ 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public void execute(Storage storage, Ui ui, TaskList tasks) throws KyrieException {
+        if (index > tasks.getTaskCount() || index < 1) {
+            throw new KyrieException("Task does not exist in your list");
+        }
         tasks.unmarkTaskAsDone(index);
         ui.showMarkedTask(tasks.getTask(index));
         storage.saveData(tasks);

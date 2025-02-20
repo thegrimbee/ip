@@ -24,7 +24,13 @@ public class TagCommand extends Command {
      * @param task The task to tag.
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public void execute(Storage storage, Ui ui, TaskList tasks) throws KyrieException {
+        if (tagName.isEmpty()) {
+            throw new KyrieException("Tag name cannot be empty!");
+        }
+        if (taskIndex > tasks.getTaskCount() || taskIndex < 1) {
+            throw new KyrieException("Task does not exist in your list");
+        }
         Task task = tasks.getTask(taskIndex);
         task.addTag(new Tag(tagName));
         ui.showTaggedTask(task);

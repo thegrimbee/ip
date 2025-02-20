@@ -25,7 +25,10 @@ public class FindCommand extends Command {
      * @param ui The ui object to show the user the found tasks.
      * @param tasks The task list to find the tasks from.
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public void execute(Storage storage, Ui ui, TaskList tasks) throws KyrieException {
+        if (keyword.isEmpty()) {
+            throw new KyrieException("Keyword to find tasks cannot be empty!");
+        }
         TaskList foundTasks = tasks.findTasks(keyword);
         ui.showFoundTasks(foundTasks);
     }
