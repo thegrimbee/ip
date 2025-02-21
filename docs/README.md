@@ -1,6 +1,6 @@
 # Kyrie User Guide
 
-![Ui.png](../docs/Ui.png)
+![Ui](https://thegrimbee.github.io/ip/Ui.png)
 
 Welcome to Kyrie, your personal task manager! Kyrie helps you keep track of your tasks, deadlines, and events. This guide will walk you through the features and commands available in Kyrie.
 
