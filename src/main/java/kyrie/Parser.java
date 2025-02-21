@@ -62,8 +62,8 @@ public class Parser {
      * @throws KyrieException If the task description is invalid.
      */
     public static AddTodoCommand parseTodoCommand(String commandString) throws KyrieException {
-        String[] commandParts = commandString.split(" ");
-        if (commandParts.length != 2) {
+        String[] commandParts = commandString.split(" ", 2);
+        if (commandParts.length < 2) {
             throw new KyrieException("Invalid command format, please follow the format: todo <description>");
         }
         return new AddTodoCommand(commandParts[1]);
@@ -77,15 +77,12 @@ public class Parser {
      * @throws KyrieException If the task description is invalid.
      */
     public static AddDeadlineCommand parseDeadlineCommand(String commandString) throws KyrieException {
-        String[] commandParts = commandString.split(" ");
-        if (commandParts.length < 4) {
+        String[] commandParts = commandString.split(" /by ");
+        String[] subCommandParts = commandParts[0].split(" ", 2);
+        if (commandParts.length != 2 || subCommandParts.length < 2) {
             throw new KyrieException("Invalid command format, please follow the format: deadline <description> /by <date time>");
         }
-        String[] dateTimeParts = commandString.split(" /by ");
-        if (dateTimeParts.length != 2) {
-            throw new KyrieException("Invalid command format, please follow the format: deadline <description> /by <date time>");
-        }
-        return new AddDeadlineCommand(commandParts[1], new DateTime(dateTimeParts[1]));
+        return new AddDeadlineCommand(subCommandParts[1], new DateTime(commandParts[1]));
     }
 
     /**
@@ -96,19 +93,13 @@ public class Parser {
      * @throws KyrieException If the task description is invalid.
      */
     public static AddEventCommand parseEventCommand(String commandString) throws KyrieException {
-        String[] commandParts = commandString.split(" ");
-        if (commandParts.length < 5) {
-            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
+        String[] commandParts = commandString.split(" /from ");
+        String[] subCommandParts = commandParts[0].split(" ", 2);
+        String[] periodParts = commandParts[1].split(" /to ");
+        if (commandParts.length != 2 || subCommandParts.length < 2 || periodParts.length != 2) {
+            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <start date time> /to <end date time>");
         }
-        String[] dateTimeParts = commandString.split(" /from ");
-        if (dateTimeParts.length != 2) {
-            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
-        }
-        String[] periodParts = dateTimeParts[1].split(" /to ");
-        if (periodParts.length != 2) {
-            throw new KyrieException("Invalid command format, please follow the format: event <description> /from <date time> /to <date time>");
-        }
-        return new AddEventCommand(commandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
+        return new AddEventCommand(subCommandParts[1], new DateTime(periodParts[0]), new DateTime(periodParts[1]));
     }
 
     /**
