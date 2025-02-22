@@ -22,9 +22,12 @@ Welcome to Kyrie, your personal task manager! Kyrie helps you keep track of your
 
 ## How to get started
 
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Run the application using your preferred IDE or command line.
+1. Ensure you have Java 17 or above installed in your Computer. 
+Mac users: Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
+2. Download the latest jar file from [here](https://github.com/thegrimbee/ip/releases/tag/A-Release)
+3. Open a command line in the folder where the jar file is
+4. Run java -jar kyrie.jar
+5. You are good to go! Check out some of the commands [here](#command-summary)
 
 ## Features
 
