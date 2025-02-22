@@ -45,6 +45,8 @@ Adds a deadline task to your task list.
 
 **Command**: `deadline <description> /by <date time>`
 
+**Date Time Format**: `DD/MM/YYYY HHMM`
+
 **Example**: deadline return book /by 21/02/2025 2000
 
 ### Adding an Event
@@ -52,6 +54,8 @@ Adds a deadline task to your task list.
 Adds an event task to your task list.
 
 **Command**: `event <description> /from <start date time> /to <end date time>`
+
+**Date Time Format**: `DD/MM/YYYY HHMM`
 
 **Example**: event project meeting /from 22/02/2025 0100 /to 22/02/2025 0200
 
