@@ -66,7 +66,7 @@ Marks a task as done.
 
 **Command**: `mark <task number>`
 
-**Example**: mark 1
+**Example**: mark 2
 
 ### Unmarking a Task
 
