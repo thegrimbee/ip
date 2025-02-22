@@ -58,11 +58,15 @@ Lists all tasks in your task list.
 
 **Command**: `list`
 
+**Example**: list
+
 ### Marking a Task as Done
 
 Marks a task as done.
 
 **Command**: `mark <task number>`
+
+**Example**: mark 1
 
 ### Unmarking a Task
 
@@ -70,17 +74,23 @@ Unmarks a task as done.
 
 **Command**: `unmark <task number>`
 
+**Example**: unmark 1
+
 ### Deleting a Task
 
 Deletes a task from your task list.
 
 **Command**: `delete <task number>`
 
+**Example**: delete 1
+
 ### Finding Tasks
 
 Finds tasks that contain a keyword.
 
 **Command**: `find <keyword>`
+
+**Example**: find book
 
 ### Tagging a Task
 
@@ -95,6 +105,8 @@ Tags a task with a specified tag.
 Exits the Kyrie application.
 
 **Command**: `bye`
+
+**Example**: bye
 
 ## Command Summary
 
